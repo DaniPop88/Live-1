@@ -700,6 +700,35 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+      
+        .platform-button {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1f2937;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .platform-button:hover {
+            transform: translateY(-3px);
+            border-color: #DC2626;
+            color: #DC2626;
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.15);
+        }
+
+        @media (max-width: 480px) {
+            .platform-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
