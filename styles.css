@@ -257,7 +257,7 @@ main {
   margin:0;
   padding:0;
 }
-.platform-grid:has(:only-child) {
+.platform-grid.single {
   grid-template-columns: 1fr !important;
   justify-items: center;
 }
