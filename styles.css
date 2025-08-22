@@ -258,10 +258,19 @@ main {
   padding: 0;
 }
 
-/* Kalau jumlah anak ganjil, terakhir di tengah */
+/* Kalau jumlah anak ganjil, item terakhir auto di tengah dan full lebar */
 .platform-grid > :nth-child(odd):last-child {
   grid-column: 1 / span 2;
-  justify-self: center;
+  justify-self: stretch;
+  text-align: center;
+}
+
+.platform-grid > :nth-child(odd):last-child .platform-link {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px; /* Biar tinggi tetap */
 }
 
 .platform-link {
