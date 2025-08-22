@@ -297,9 +297,6 @@ main {
   object-fit: contain;
   margin: 0 auto;
   background: #fff;
-  border-radius: 7px;
-  /* Optional: border/box-shadow for logo clarity */
-  box-shadow: 0 1px 4px rgba(204,0,0,0.07);
 }
 
 /* Ripple layer (dinamis por JS) */
