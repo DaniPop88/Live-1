@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POP - A Plataforma com os Maiores Bônus do Brasil!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #f5f5f5 100%);
+            color: #333333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+            animation: headerGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% { box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3); }
+            100% { box-shadow: 0 4px 30px rgba(204, 0, 0, 0.6), 0 0 20px rgba(204, 0, 0, 0.2); }
+        }
+
+        .header h1 {
+            font-size: clamp(14px, 4vw, 18px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            animation: textPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textPulse {
+            0% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+            100% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.5); }
+        }
+
+        .header h1 {
+            font-size: clamp(14px, 4vw, 18px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInUp {
+            0% { 
+                transform: translateY(30px); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: translateY(0); 
+                opacity: 1; 
+            }
+        }
+
+        /* Promotional Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+            border: 3px solid rgba(204, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            animation: bannerFloat 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes bannerFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .promo-banner:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(204, 0, 0, 0.1);
+        }
+
+        .banner-content {
+            display: flex;
+            height: 200px;
+        }
+
+        .banner-left {
+            flex: 1;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-right: 2px solid rgba(204, 0, 0, 0.1);
+        }
+
+        .banner-left::before {
+            content: '🎮';
+            font-size: 60px;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 10px rgba(204, 0, 0, 0.3));
+            animation: gameIconBounce 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes gameIconBounce {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .placeholder-text {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #666666;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 8px;
+            border-radius: 5px;
+            border: 1px solid rgba(204, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-right {
+            flex: 1;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: redGradientShift 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes redGradientShift {
+            0% { background: linear-gradient(135deg, #cc0000 0%, #990000 100%); }
+            100% { background: linear-gradient(135deg, #dd0000 0%, #aa0000 100%); }
+        }
+
+        .streaming-labels {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .label {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            animation: labelGlow 2s ease-in-out infinite alternate;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes labelGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.1); }
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #990000;
+            padding: 16px 28px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: ctaPulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        @keyframes ctaPulse {
+            0% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+            50% { box-shadow: 0 8px 30px rgba(153, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+        }
+
+        /* Platform Links */
+        .platform-links {
+            margin-bottom: 30px;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Platform Links */
+        .platform-links {
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .platform-link {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #333333;
+            text-decoration: none;
+            padding: 18px 12px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(204, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .platform-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(204, 0, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .platform-link:hover::before {
+            left: 100%;
+        }
+
+        .platform-link:hover {
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            color: #ffffff;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(204, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .platform-link:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        /* Staggered animation for platform links */
+        .platform-link:nth-child(1) { animation-delay: 0.1s; }
+        .platform-link:nth-child(2) { animation-delay: 0.2s; }
+        .platform-link:nth-child(3) { animation-delay: 0.3s; }
+        .platform-link:nth-child(4) { animation-delay: 0.4s; }
+        .platform-link:nth-child(5) { animation-delay: 0.5s; }
+        .platform-link:nth-child(6) { animation-delay: 0.6s; }
+        .platform-link:nth-child(7) { animation-delay: 0.7s; }
+        .platform-link:nth-child(8) { animation-delay: 0.8s; }
+        .platform-link:nth-child(9) { animation-delay: 0.9s; }
+        .platform-link:nth-child(10) { animation-delay: 1.0s; }
+        .platform-link:nth-child(11) { animation-delay: 1.1s; }
+        .platform-link:nth-child(12) { animation-delay: 1.2s; }
+        .platform-link:nth-child(13) { animation-delay: 1.3s; }
+        .platform-link:nth-child(14) { animation-delay: 1.4s; }
+
+        /* Social Groups */
+        .social-groups {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .social-link {
+            flex: 1;
+            background: linear-gradient(135deg, #25d366 0%, #20ba5a 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 8px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link.telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+        }
+
+        .social-link.facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .social-link i {
+            font-size: 24px;
+            animation: iconBounce 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes iconBounce {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Sliding Banner */
+        .sliding-banner {
+            position: relative;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid rgba(204, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-slide.active {
+            opacity: 1;
+        }
+
+        .banner-slide::before {
+            content: '🎰';
+            font-size: 80px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+            animation: slotSpin 3s ease-in-out infinite;
+        }
+
+        @keyframes slotSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .slide-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 15px;
+            border-radius: 10px;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+        }
+
+        /* Customer Service Button */
+        .customer-service {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .cs-button {
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            color: white;
+            text-decoration: none;
+            padding: 20px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(204, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .cs-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cs-button:hover::before {
+            left: 100%;
+        }
+
+        .cs-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(204, 0, 0, 0.4);
+            background: linear-gradient(135deg, #dd0000 0%, #aa0000 100%);
+        }
+
+        .cs-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .cs-button i {
+            font-size: 20px;
+            animation: telegramPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes telegramPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 51, 102, 0.3);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #ff3366;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ff3366;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff3366;
+            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .phone-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .country-code {
+            background: rgba(255, 51, 102, 0.2);
+            border: 2px solid rgba(255, 51, 102, 0.3);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #ffffff;
+            font-weight: 600;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: #ffffff;
+        }
+
+        .submit-btn.valid {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .submit-btn.invalid {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-message {
+            color: #ff6666;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 500;
+            text-shadow: 0 0 5px rgba(255, 102, 102, 0.3);
+        }
+
+        .success-message {
+            color: #66ff66;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 500;
+            text-shadow: 0 0 5px rgba(102, 255, 102, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .banner-content {
+                height: 150px;
+            }
+
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-groups {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>POP: a plataforma com os maiores bônus do Brasil! Porque onde há gratidão, há generosidade.</h1>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Promotional Banner -->
+        <div class="promo-banner">
+            <div class="banner-content">
+                <div class="banner-left">
+                    <div class="placeholder-text">1:1 Image Placeholder</div>
+                </div>
+                <div class="banner-right">
+                    <div class="streaming-labels">
+                        <span class="label">Streaming</span>
+                        <span class="label">Live</span>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">
+                        <i class="fas fa-mouse-pointer"></i>
+                        Registre-se Agora!!!
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Registration Links -->
+        <div class="platform-links">
+            <div class="platform-grid">
+                <a href="#" class="platform-link">REGISTER TO POPBRA</a>
+                <a href="#" class="platform-link">REGISTER TO POP888</a>
+                <a href="#" class="platform-link">REGISTER TO POP678</a>
+                <a href="#" class="platform-link">REGISTER TO POPPG</a>
+                <a href="#" class="platform-link">REGISTER TO POP555</a>
+                <a href="#" class="platform-link">REGISTER TO POPLUA</a>
+                <a href="#" class="platform-link">REGISTER TO POPCEU</a>
+                <a href="#" class="platform-link">REGISTER TO POPBEM</a>
+                <a href="#" class="platform-link">REGISTER TO POPBOA</a>
+                <a href="#" class="platform-link">REGISTER TO POPWB</a>
+                <a href="#" class="platform-link">REGISTER TO POPDEZ</a>
+                <a href="#" class="platform-link">REGISTER TO POPMEL</a>
+                <a href="#" class="platform-link">REGISTER TO 26BET</a>
+                <a href="#" class="platform-link">REGISTER TO POPKKK</a>
+            </div>
+        </div>
+
+        <!-- Social Groups -->
+        <div class="social-groups">
+            <a href="#" class="social-link telegram">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Telegram</span>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="#" class="social-link facebook">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+        </div>
+
+        <!-- Sliding Banner -->
+        <div class="sliding-banner">
+            <div class="banner-slide active">
+                <div class="slide-text">Slide 1 Placeholder</div>
+            </div>
+            <div class="banner-slide">
+                <div class="slide-text">Slide 2 Placeholder</div>
+            </div>
+            <div class="banner-slide">
+                <div class="slide-text">Slide 3 Placeholder</div>
+            </div>
+        </div>
+
+        <!-- Customer Service -->
+        <div class="customer-service">
+            <a href="#" class="cs-button">
+                <i class="fab fa-telegram-plane"></i>
+                Fale com Atendimento
+            </a>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2>Cadastro POP Platform</h2>
+                <p>Complete seus dados para se registrar</p>
+            </div>
+            
+            <form id="registrationForm">
+                <!-- WhatsApp Number -->
+                <div class="form-group">
+                    <label for="whatsapp">NÚMERO DE WHATSAPP *</label>
+                    <div class="phone-input">
+                        <div class="country-code">+55</div>
+                        <input 
+                            type="tel" 
+                            id="whatsapp" 
+                            name="whatsapp"
+                            placeholder="(00) 00000-0000"
+                            maxlength="15"
+                            required
+                        >
+                    </div>
+                    <div class="error-message" id="whatsappError"></div>
+                </div>
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">NOME COMPLETO *</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName"
+                        placeholder="Nome deve coincidir com CPF"
+                        required
+                    >
+                    <div class="error-message" id="fullNameError"></div>
+                </div>
+
+                <!-- CEP -->
+                <div class="form-group">
+                    <label for="cep">CEP *</label>
+                    <input 
+                        type="text" 
+                        id="cep" 
+                        name="cep"
+                        placeholder="01311-200"
+                        maxlength="9"
+                        required
+                    >
+                    <div class="error-message" id="cepError"></div>
+                </div>
+
+                <!-- State -->
+                <div class="form-group">
+                    <label for="state">ESTADO *</label>
+                    <select id="state" name="state" required>
+                        <option value="">Selecione um estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                    <div class="error-message" id="stateError"></div>
+                </div>
+
+                <!-- City -->
+                <div class="form-group">
+                    <label for="city">CIDADE *</label>
+                    <select id="city" name="city" required disabled>
+                        <option value="">Escolha seu estado primeiro</option>
+                    </select>
+                    <div class="error-message" id="cityError"></div>
+                    <small style="color: rgba(255,255,255,0.7);">Use a ESTADO-CIDADE correta conforme o CEP</small>
+                </div>
+
+                <!-- Neighborhood -->
+                <div class="form-group">
+                    <label for="neighborhood">BAIRRO *</label>
+                    <input 
+                        type="text" 
+                        id="neighborhood" 
+                        name="neighborhood"
+                        placeholder="Ex: Moema, Barra da Tijuca"
+                        required
+                    >
+                    <div class="error-message" id="neighborhoodError"></div>
+                </div>
+
+                <!-- Street -->
+                <div class="form-group">
+                    <label for="street">RUA / AVENIDA *</label>
+                    <input 
+                        type="text" 
+                        id="street" 
+                        name="street"
+                        placeholder="Ex: Rua das Flores, Avenida Paulista"
+                        required
+                    >
+                    <div class="error-message" id="streetError"></div>
+                </div>
+
+                <!-- Number -->
+                <div class="form-group">
+                    <label for="number">NÚMERO *</label>
+                    <input 
+                        type="text" 
+                        id="number" 
+                        name="number"
+                        placeholder="Ex: 45 ou SN se não tiver número"
+                        required
+                    >
+                    <div class="error-message" id="numberError"></div>
+                    <small style="color: rgba(255,255,255,0.7);">Digite "SN" se o endereço não tiver número</small>
+                </div>
+
+                <!-- Complement -->
+                <div class="form-group">
+                    <label for="complement">COMPLEMENTO/REFERÊNCIAS</label>
+                    <input 
+                        type="text" 
+                        id="complement" 
+                        name="complement"
+                        placeholder="Ex: Apto 101, Conj. 3, Bloco B"
+                    >
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="submitText">Enviar Cadastro</span>
+                    <span id="submitLoading" class="loading" style="display: none;"></span>
+                </button>
+                <div class="error-message" id="submitError"></div>
+                <div class="success-message" id="submitSuccess"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal Functions
+        function openModal() {
+            document.getElementById('registrationModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('registrationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Sliding Banner
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(nextSlide, 2000);
+
+        // Phone Number Formatting
+        document.getElementById('whatsapp').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                if (value.length <= 2) {
+                    value = value.replace(/(\d{2})/, '($1) ');
+                } else if (value.length <= 7) {
+                    value = value.replace(/(\d{2})(\d{5})/, '($1) $2-');
+                } else {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            }
+        });
+
+        // CEP Formatting
+        document.getElementById('cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 8) {
+                value = value.replace(/(\d{5})(\d{3})/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+
+        // Sample city data (simplified - you can expand this)
+        const citiesByState = {
+            'SP': ['São Paulo', 'Campinas', 'Santos', 'Ribeirão Preto', 'Sorocaba'],
+            'RJ': ['Rio de Janeiro', 'Niterói', 'Campos dos Goytacazes', 'Nova Iguaçu', 'Duque de Caxias'],
+            'MG': ['Belo Horizonte', 'Uberlândia', 'Contagem', 'Juiz de Fora', 'Betim'],
+            'RS': ['Porto Alegre', 'Caxias do Sul', 'Pelotas', 'Canoas', 'Santa Maria'],
+            'PR': ['Curitiba', 'Londrina', 'Maringá', 'Ponta Grossa', 'Cascavel'],
+            'SC': ['Florianópolis', 'Joinville', 'Blumenau', 'Caxias do Sul', 'Chapecó'],
+            'BA': ['Salvador', 'Feira de Santana', 'Vitória da Conquista', 'Camaçari', 'Itabuna'],
+            'GO': ['Goiânia', 'Aparecida de Goiânia', 'Anápolis', 'Rio Verde', 'Luziânia'],
+            'PE': ['Recife', 'Jaboatão dos Guararapes', 'Olinda', 'Caruaru', 'Petrolina'],
+            'CE': ['Fortaleza', 'Caucaia', 'Juazeiro do Norte', 'Maracanaú', 'Sobral']
+        };
+
+        // State change handler
+        document.getElementById('state').addEventListener('change', function() {
+            const citySelect = document.getElementById('city');
+            const selectedState = this.value;
+            
+            citySelect.innerHTML = '<option value="">Selecione uma cidade</option>';
+            
+            if (selectedState && citiesByState[selectedState]) {
+                citySelect.disabled = false;
+                citiesByState[selectedState].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            } else {
+                citySelect.disabled = true;
+                citySelect.innerHTML = '<option value="">Escolha seu estado primeiro</option>';
+            }
+        });
+
+        // Form validation
+        function validateForm() {
+            const whatsapp = document.getElementById('whatsapp').value.replace(/\D/g, '');
+            const fullName = document.getElementById('fullName').value.trim();
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+            const state = document.getElementById('state').value;
+            const city = document.getElementById('city').value;
+            const neighborhood = document.getElementById('neighborhood').value.trim();
+            const street = document.getElementById('street').value.trim();
+            const number = document.getElementById('number').value.trim();
+            
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            
+            // Validate WhatsApp
+            if (whatsapp.length !== 11) {
+                document.getElementById('whatsappError').textContent = 'Número deve ter 11 dígitos (DDD + número)';
+                isValid = false;
+            }
+            
+            // Validate full name
+            if (fullName.length < 3) {
+                document.getElementById('fullNameError').textContent = 'Nome completo é obrigatório';
+                isValid = false;
+            }
+            
+            // Validate CEP
+            if (cep.length !== 8) {
+                document.getElementById('cepError').textContent = 'Digite o CEP no formato 00000-000';
+                isValid = false;
+            }
+            
+            // Validate state
+            if (!state) {
+                document.getElementById('stateError').textContent = 'Selecione um estado';
+                isValid = false;
+            }
+            
+            // Validate city
+            if (!city) {
+                document.getElementById('cityError').textContent = 'Selecione uma cidade';
+                isValid = false;
+            }
+            
+            // Validate neighborhood
+            if (neighborhood.length < 2) {
+                document.getElementById('neighborhoodError').textContent = 'Bairro é obrigatório';
+                isValid = false;
+            }
+            
+            // Validate street
+            if (street.length < 3) {
+                document.getElementById('streetError').textContent = 'Rua/Avenida é obrigatório';
+                isValid = false;
+            }
+            
+            // Validate number
+            if (number.length < 1) {
+                document.getElementById('numberError').textContent = 'Número é obrigatório (ou "SN")';
+                isValid = false;
+            }
+            
+            // Update submit button
+            const submitBtn = document.getElementById('submitBtn');
+            if (isValid) {
+                submitBtn.classList.remove('invalid');
+                submitBtn.classList.add('valid');
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.classList.remove('valid');
+                submitBtn.classList.add('invalid');
+                submitBtn.disabled = true;
+            }
+            
+            return isValid;
+        }
+
+        // Real-time validation
+        document.querySelectorAll('#registrationForm input, #registrationForm select').forEach(input => {
+            input.addEventListener('input', validateForm);
+            input.addEventListener('change', validateForm);
+        });
+
+        // Simulate checking for duplicate phone numbers
+        const existingPhones = [
+            '11987654321', // Sample existing numbers for testing
+            '21123456789',
+            '85999887766'
+        ];
+
+        function checkDuplicatePhone(phone) {
+            return existingPhones.includes(phone.replace(/\D/g, ''));
+        }
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const formData = new FormData(e.target);
+            const phone = formData.get('whatsapp').replace(/\D/g, '');
+            
+            // Check for duplicate phone
+            if (checkDuplicatePhone(phone)) {
+                document.getElementById('submitError').textContent = 'Este número já está cadastrado em nosso sistema!';
+                document.getElementById('submitBtn').classList.add('invalid');
+                document.getElementById('submitBtn').classList.remove('valid');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('submitText').style.display = 'none';
+            document.getElementById('submitLoading').style.display = 'inline-block';
+            document.getElementById('submitBtn').disabled = true;
+            
+            // Prepare data for submission
+            const registrationData = {
+                whatsapp: formData.get('whatsapp'),
+                fullName: formData.get('fullName'),
+                cep: formData.get('cep'),
+                state: formData.get('state'),
+                city: formData.get('city'),
+                neighborhood: formData.get('neighborhood'),
+                street: formData.get('street'),
+                number: formData.get('number'),
+                complement: formData.get('complement') || '',
+                timestamp: new Date().toISOString(),
+                ip: await getUserIP()
+            };
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Here you would integrate with Google Sheets API and Telegram Bot
+                console.log('Registration data:', registrationData);
+                
+                // Show success
+                document.getElementById('submitSuccess').textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+                document.getElementById('submitError').textContent = '';
+                
+                // Reset form after success
+                setTimeout(() => {
+                    closeModal();
+                    document.getElementById('registrationForm').reset();
+                    document.getElementById('submitSuccess').textContent = '';
+                    validateForm();
+                }, 3000);
+                
+            } catch (error) {
+                document.getElementById('submitError').textContent = 'Erro ao enviar cadastro. Tente novamente.';
+                console.error('Submission error:', error);
+            } finally {
+                // Hide loading
+                document.getElementById('submitText').style.display = 'inline';
+                document.getElementById('submitLoading').style.display = 'none';
+                document.getElementById('submitBtn').disabled = false;
+            }
+        });
+
+        // Get user IP (you can use a service like ipapi.co)
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                return 'Unknown';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('registrationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize form validation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            validateForm();
+        });
+
+        // Google Sheets Integration (Example)
+        /*
+        To integrate with Google Sheets, you can use Google Apps Script:
+        
+        1. Create a Google Sheet with columns: Timestamp, WhatsApp, Name, CEP, State, City, Neighborhood, Street, Number, Complement, IP
+        2. Create a Google Apps Script with a web app that accepts POST requests
+        3. Replace the simulation above with actual fetch call to your Google Apps Script URL
+        
+        Example Google Apps Script:
+        
+        function doPost(e) {
+          const sheet = SpreadsheetApp.openById('YOUR_SHEET_ID').getActiveSheet();
+          const data = JSON.parse(e.postData.contents);
+          
+          sheet.appendRow([
+            data.timestamp,
+            data.whatsapp,
+            data.fullName,
+            data.cep,
+            data.state,
+            data.city,
+            data.neighborhood,
+            data.street,
+            data.number,
+            data.complement,
+            data.ip
+          ]);
+          
+          return ContentService.createTextOutput(JSON.stringify({success: true})).setMimeType(ContentService.MimeType.JSON);
+        }
+        */
+
+        // Telegram Bot Integration (Example)
+        /*
+        To integrate with Telegram Bot:
+        
+        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';
+        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID';
+        
+        function sendToTelegram(data) {
+          const message = `
+        🆕 NOVO CADASTRO POP PLATFORM
+        
+        📱 WhatsApp: ${data.whatsapp}
+        👤 Nome: ${data.fullName}
+        📮 CEP: ${data.cep}
+        🏠 Endereço: ${data.street}, ${data.number}
+        🏘️ Bairro: ${data.neighborhood}
+        🏙️ Cidade: ${data.city} - ${data.state}
+        📝 Complemento: ${data.complement}
+        ⏰ Data: ${new Date(data.timestamp).toLocaleString('pt-BR')}
+        🌐 IP: ${data.ip}
+          `;
+          
+          fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: 'HTML'
+            })
+          });
+        }
+        */
+    </script>
+</body>
+</html>
