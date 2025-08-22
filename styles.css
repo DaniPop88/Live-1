@@ -251,18 +251,20 @@ main {
   border: 2px solid #ff1d1d;
   color: #c40000;
   text-decoration: none;
-  padding: 18px 36px 18px 16px; /* padding kanan lebar buat pointer */
+  padding: 18px 18px;
   border-radius: 10px;
-  text-align: left; /* rata kiri */
   font-weight: 900;
-  font-size: 19px; /* lebih besar */
+  font-size: 19px;
   letter-spacing: .6px;
   transition: var(--transition), background-position 1.8s ease;
   box-shadow: 0 2px 15px rgba(0,0,0,0.08);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   isolation: isolate;
   opacity: 0;
   transform: translateY(14px) scale(.98);
@@ -304,30 +306,22 @@ main {
   content: "\f245";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  position: absolute;
-  top: 50%;
-  right: 12px;
   font-size: 22px;
   color: #c40000;
   opacity: .92;
   animation: pointerWiggle 2.1s ease-in-out infinite;
-  transform: translateY(-58%) rotate(-36deg) scale(1.14); /* makin miring dan deket */
+  transform: rotate(-36deg) scale(1.14); /* makin miring */
   pointer-events: none;
   text-shadow: 0 2px 4px rgba(0,0,0,0.22);
+  margin-left: 2px; /* cursor nempel ke text */
+  display: inline-block;
+  vertical-align: middle;
 }
 .platform-link:hover::after,
 .platform-link:focus-visible::after {
   animation-play-state: paused;
   color: #ff1d1d;
-  transform: translateY(-58%) rotate(-46deg) scale(1.21);
-}
-
-@keyframes pointerWiggle {
-  0% { transform:translateY(-58%) rotate(-36deg) scale(1.14); }
-  25% { transform:translateY(-58%) rotate(-26deg) scale(1.18); }
-  50% { transform:translateY(-58%) rotate(-41deg) scale(1.12); }
-  75% { transform:translateY(-58%) rotate(-32deg) scale(1.15); }
-  100% { transform:translateY(-58%) rotate(-36deg) scale(1.14); }
+  transform: rotate(-46deg) scale(1.21);
 }
 
 /* Animation delay pointer berbeda */
@@ -360,11 +354,12 @@ main {
 @media (max-width:520px) {
   .platform-link {
     font-size: 16px;
-    padding: 13px 30px 13px 11px;
+    padding: 13px 11px;
+    gap: 6px;
   }
   .platform-link::after {
     font-size: 19px;
-    right: 8px;
+    margin-left: 1px;
   }
 }
 
@@ -596,7 +591,8 @@ input[type=tel]:focus {
   .banner-content { height:200px; }
   .banner-right { padding:18px 16px 16px; gap:12px; }
   .promo-text p { font-size:clamp(11.5px,3.6vw,14px); }
-  .platform-link { font-size:11px; padding:13px 8px; }
+  .platform-link { font-size:16px; padding:13px 11px; gap:6px; }
+  .platform-link::after { font-size:19px; margin-left:1px; }
   .social-link { padding:11px 6px; font-size:11px; }
   .modal-content { padding:22px 20px 28px; }
   .marquee__inner span { font-size:clamp(14px,4vw,18px); }
