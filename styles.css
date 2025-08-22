@@ -250,17 +250,20 @@ main {
 /* ============ PLATFORM LINKS (VARIADOS) ============ */
 .platform-section { margin-bottom:10px; }
 .platform-grid {
-  list-style:none;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  margin:0;
-  padding:0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
 }
-.platform-grid.single {
-  grid-template-columns: 1fr !important;
-  justify-items: center;
+
+/* Kalau jumlah anak ganjil, terakhir di tengah */
+.platform-grid > :nth-child(odd):last-child {
+  grid-column: 1 / span 2;
+  justify-self: center;
 }
+
 .platform-link {
   background: #fff;
   border: 2px solid #ff1d1d;
