@@ -123,16 +123,27 @@ main {
 .promo-text p { margin:0; line-height:1.25; font-size:clamp(12px,1.7vw,15px); letter-spacing:.3px; }
 
 .cta-button {
-  margin-top: 20px;
-  width:100%; background:var(--gradient-light); color:#990000;
-  padding:5px 20px; border:none; border-radius:16px;
-  font-size:13px; font-weight:800; text-transform:uppercase;
-  cursor:pointer; transition:var(--transition);
-  display:flex; align-items:center; justify-content:center; gap:10px;
-  position:relative; letter-spacing:.5px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-  border:3px solid rgba(255,255,255,0.85);
-  overflow:hidden;
+  margin-top: 34px;     /* Lebih turun dari atas */
+  width: 100%;
+  background: var(--gradient-light);
+  color: #990000;
+  padding: 12px 24px;   /* Besarin tombol */
+  border: none;
+  border-radius: 18px;
+  font-size: 18px;      /* Besarin tulisan */
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  letter-spacing: .5px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border: 3px solid rgba(255,255,255,0.85);
+  overflow: hidden;
 }
 .cta-button::before {
   content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
@@ -546,4 +557,12 @@ input[type=tel]:focus {
 @media (prefers-reduced-motion: reduce) {
   * { animation:none !important; transition:none !important; }
   .platform-link { transform:none !important; }
+}
+
+@media (max-width:520px) {
+  .cta-button {
+    font-size: 16px;
+    padding: 10px 18px;
+    margin-top: 28px;
+  }
 }
