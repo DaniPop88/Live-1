@@ -257,6 +257,10 @@ main {
   margin:0;
   padding:0;
 }
+.platform-grid:has(:only-child) {
+  grid-template-columns: 1fr !important;
+  justify-items: center;
+}
 .platform-link {
   background: #fff;
   border: 2px solid #ff1d1d;
