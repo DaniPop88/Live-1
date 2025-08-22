@@ -118,32 +118,13 @@
             justify-content: center;
             position: relative;
             border-right: 2px solid rgba(204, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        .banner-left::before {
-            content: '🎮';
-            font-size: 60px;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 10px rgba(204, 0, 0, 0.3));
-            animation: gameIconBounce 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes gameIconBounce {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.1) rotate(5deg); }
-        }
-
-        .placeholder-text {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 12px;
-            color: #666666;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 5px 8px;
-            border-radius: 5px;
-            border: 1px solid rgba(204, 0, 0, 0.2);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        .banner-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .banner-right {
@@ -441,17 +422,10 @@
             opacity: 1;
         }
 
-        .banner-slide::before {
-            content: '🎰';
-            font-size: 80px;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
-            animation: slotSpin 3s ease-in-out infinite;
-        }
-
-        @keyframes slotSpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .slide-text {
@@ -740,7 +714,7 @@
         <div class="promo-banner">
             <div class="banner-content">
                 <div class="banner-left">
-                    <div class="placeholder-text">1:1 Image Placeholder</div>
+                    <img src="https://i.ibb.co/0yJBGXJB/inv3p1.png" alt="POP Platform Banner">
                 </div>
                 <div class="banner-right">
                     <div class="streaming-labels">
@@ -758,20 +732,19 @@
         <!-- Platform Registration Links -->
         <div class="platform-links">
             <div class="platform-grid">
-                <a href="#" class="platform-link">REGISTER TO POPBRA</a>
-                <a href="#" class="platform-link">REGISTER TO POP888</a>
-                <a href="#" class="platform-link">REGISTER TO POP678</a>
-                <a href="#" class="platform-link">REGISTER TO POPPG</a>
-                <a href="#" class="platform-link">REGISTER TO POP555</a>
-                <a href="#" class="platform-link">REGISTER TO POPLUA</a>
-                <a href="#" class="platform-link">REGISTER TO POPCEU</a>
-                <a href="#" class="platform-link">REGISTER TO POPBEM</a>
-                <a href="#" class="platform-link">REGISTER TO POPBOA</a>
-                <a href="#" class="platform-link">REGISTER TO POPWB</a>
-                <a href="#" class="platform-link">REGISTER TO POPDEZ</a>
-                <a href="#" class="platform-link">REGISTER TO POPMEL</a>
-                <a href="#" class="platform-link">REGISTER TO 26BET</a>
-                <a href="#" class="platform-link">REGISTER TO POPKKK</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPBRA</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POP888</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POP678</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPPG</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POP555</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPLUA</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPCEU</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPBEM</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPBOA</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPWB</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPDEZ</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO 26BET</a>
+                <a href="https://www.google.com" class="platform-link">REGISTER TO POPKKK</a>
             </div>
         </div>
 
@@ -779,28 +752,28 @@
         <div class="social-groups">
             <a href="#" class="social-link telegram">
                 <i class="fab fa-telegram-plane"></i>
-                <span>Telegram</span>
+                <span>Telegram Grupo</span>
             </a>
             <a href="#" class="social-link">
                 <i class="fab fa-whatsapp"></i>
-                <span>WhatsApp</span>
+                <span>WhatsApp Grupo</span>
             </a>
             <a href="#" class="social-link facebook">
                 <i class="fab fa-facebook-f"></i>
-                <span>Facebook</span>
+                <span>Facebook Grupo</span>
             </a>
         </div>
 
         <!-- Sliding Banner -->
         <div class="sliding-banner">
             <div class="banner-slide active">
-                <div class="slide-text">Slide 1 Placeholder</div>
+                <img src="https://i.ibb.co/4gf8tQMD/image.png" alt="POP Platform Slide 1">
             </div>
             <div class="banner-slide">
-                <div class="slide-text">Slide 2 Placeholder</div>
+                <img src="https://i.ibb.co/gZyCW0L8/image.png" alt="POP Platform Slide 2">
             </div>
             <div class="banner-slide">
-                <div class="slide-text">Slide 3 Placeholder</div>
+                <img src="https://i.ibb.co/ycn5b9rf/image.png" alt="POP Platform Slide 3">
             </div>
         </div>
 
