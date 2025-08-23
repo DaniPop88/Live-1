@@ -94,21 +94,64 @@ if (slider) {
   startAuto();
 }
 
-/* ========== PHONE INPUT FORMAT & VALIDATION ========== */
+/* ========== PHONE INPUT FORMAT & VALIDATION (UPDATED 10/11 dígitos) ========== */ // CHANGED
 const phoneInput = document.getElementById('whatsapp');
 const whatsappError = document.getElementById('whatsappError');
+
+// (Opcional) Lista de DDD válidos – use se quiser validar DDD no submit
+const DDD_VALIDOS = new Set([
+ '11','12','13','14','15','16','17','18','19',
+ '21','22','24','27','28',
+ '31','32','33','34','35','37','38',
+ '41','42','43','44','45','46',
+ '47','48','49',
+ '51','53','54','55',
+ '61','62','63','64','65','66','67','68','69',
+ '71','73','74','75','77','79',
+ '81','82','83','84','85','86','87','88','89',
+ '91','92','93','94','95','96','97','98','99'
+]);
 
 if (phoneInput) {
   phoneInput.addEventListener('input', e => {
     let digits = e.target.value.replace(/\D/g, '').slice(0,11);
-    if (digits.length <= 2) {
-      digits = digits.replace(/(\d{0,2})/, '($1');
-    } else if (digits.length <= 7) {
-      digits = digits.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-    } else {
-      digits = digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    if (!digits.length) {
+      e.target.value = '';
+      whatsappError.textContent = '';
+      return;
     }
-    e.target.value = digits;
+
+    if (digits.length <= 2) {
+      // Só DDD parcialmente
+      e.target.value = '(' + digits;
+      whatsappError.textContent = '';
+      return;
+    }
+
+    const ddd = digits.slice(0,2);
+    const rest = digits.slice(2);
+
+    // Decide se é caminho celular (rest[0] === '9') ou fixo
+    const isCelular = rest[0] === '9';
+
+    let formatted;
+    if (isCelular) {
+      // Celular: (DD) 9XXXX-XXXX (5+4) total 11 dígitos
+      if (rest.length <= 5) {
+        formatted = `(${ddd}) ${rest}`; // ainda sem traço
+      } else {
+        formatted = `(${ddd}) ${rest.slice(0,5)}-${rest.slice(5,9)}`;
+      }
+    } else {
+      // Fixo: (DD) XXXX-XXXX (4+4) total 10 dígitos
+      if (rest.length <= 4) {
+        formatted = `(${ddd}) ${rest}`;
+      } else {
+        formatted = `(${ddd}) ${rest.slice(0,4)}-${rest.slice(4,8)}`;
+      }
+    }
+
+    e.target.value = formatted;
     whatsappError.textContent = '';
   });
 }
