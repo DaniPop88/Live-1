@@ -243,3 +243,65 @@ document.addEventListener('mousemove', e => {
     root.style.setProperty('--marquee-speed','40s');
   }
 })();
+
+// ... kode lain tetap
+
+const form = document.getElementById('registrationForm');
+const phoneInput = document.getElementById('whatsapp');
+const submitBtn = document.getElementById('submitBtn');
+const submitText = document.getElementById('submitText');
+const submitLoading = document.getElementById('submitLoading');
+const submitError = document.getElementById('submitError');
+const submitSuccess = document.getElementById('submitSuccess');
+const whatsappError = document.getElementById('whatsappError');
+
+if (form) {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    submitError.textContent = '';
+    submitSuccess.textContent = '';
+
+    // Validasi nomor WA
+    const raw = phoneInput.value.replace(/\D/g, '');
+    if (raw.length !== 11) {
+      whatsappError.textContent = 'Número deve ter 11 dígitos (DDD + número).';
+      return;
+    }
+    whatsappError.textContent = '';
+
+    // Loading UI
+    submitBtn.disabled = true;
+    submitText.hidden = true;
+    submitLoading.hidden = false;
+
+    // Kirim ke backend
+    try {
+      const payload = {
+        numero_wa: '+55' + raw,
+        referrer: window.location.href
+      };
+      const res = await fetch('https://liveform-backend.onrender.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.ok) {
+        submitSuccess.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+        setTimeout(() => {
+          closeModal();
+          form.reset();
+          submitSuccess.textContent = '';
+        }, 2200);
+      } else {
+        submitError.textContent = data.message || 'Erro ao enviar cadastro. Tente novamente.';
+      }
+    } catch (err) {
+      submitError.textContent = 'Erro ao enviar cadastro. Tente novamente.';
+    } finally {
+      submitBtn.disabled = false;
+      submitText.hidden = false;
+      submitLoading.hidden = true;
+    }
+  });
+}
