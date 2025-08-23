@@ -113,7 +113,7 @@ if (phoneInput) {
   });
 }
 
-/* ========== FORM SUBMISSION ========== */
+/* ========== FORM SUBMISSION (REAL TO BACKEND) ========== */
 const form = document.getElementById('registrationForm');
 const submitBtn = document.getElementById('submitBtn');
 const submitText = document.getElementById('submitText');
@@ -127,32 +127,30 @@ if (form) {
     submitError.textContent = '';
     submitSuccess.textContent = '';
 
-    // Validasi nomor WA
-    const raw = phoneInput.value.replace(/\D/g, '');
+    const raw = phoneInput.value.replace(/\D/g,'');
     if (raw.length !== 11) {
       whatsappError.textContent = 'Número deve ter 11 dígitos (DDD + número).';
       return;
     }
-    whatsappError.textContent = '';
 
-    // Loading UI
     submitBtn.disabled = true;
     submitText.hidden = true;
     submitLoading.hidden = false;
 
-    // Kirim ke backend Render
+    // Prepare payload sesuai backend
+    const payload = {
+      numero_wa: phoneInput.value.trim(),
+      referrer: window.location.href
+    };
+
     try {
-      const payload = {
-        numero_wa: '+55' + raw,
-        referrer: window.location.href
-      };
       const res = await fetch('https://poplive-backend.onrender.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      const data = await res.json();
-      if (data.ok) {
+      const result = await res.json();
+      if (res.ok && result.ok) {
         submitSuccess.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
         setTimeout(() => {
           closeModal();
@@ -160,9 +158,10 @@ if (form) {
           submitSuccess.textContent = '';
         }, 2200);
       } else {
-        submitError.textContent = data.message || 'Erro ao enviar cadastro. Tente novamente.';
+        submitError.textContent = result.message || 'Erro ao enviar cadastro.';
       }
     } catch (err) {
+      console.error(err);
       submitError.textContent = 'Erro ao enviar cadastro. Tente novamente.';
     } finally {
       submitBtn.disabled = false;
@@ -210,9 +209,15 @@ document.addEventListener('mousemove', e => {
   if(!container) return;
   const msgs = [
     'REGISTRE UMA CONTA E RECEBA SEU BÔNUS GRÁTIS!',
-    '50 GANHADORES POR DIA – NÃO FIQUE DE FORA!',
-    'PARTICIPE AGORA E DUPLIQUE SUAS CHANCES!',
-    'ENTRE NO GRUPO E VEJA OS VENCEDORES AO VIVO!'
+    'CRIE SUA CONTA AGORA E GANHE BÔNUS GRÁTIS!',
+    'CADASTRE-SE HOJE E RECEBA SEU PRÊMIO GRATUITO!',
+    'ABRA SUA CONTA E GARANTA SEU BÔNUS DE BOAS-VINDAS!',
+    'REGISTRE-SE JÁ E APROVEITE SEU BÔNUS GRÁTIS!',
+    'FAÇA SEU CADASTRO E RECEBA RECOMPENSAS IMEDIATAS!',
+    'ENTRE AGORA E GANHE BÔNUS EXCLUSIVO GRÁTIS!',
+    'CADASTRE-SE EM SEGUNDOS E GANHE BÔNUS NA HORA!',
+    'CRIE SUA CONTA GRÁTIS E RECEBA BÔNUS ESPECIAL!',
+    'REGISTRE-SE E DESBLOQUEIE SEU BÔNUS GRATUITO!'
   ];
   let idx = 0;
   msgs.forEach((m,i)=>{
