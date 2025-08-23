@@ -105,6 +105,41 @@ main {
 @keyframes float { 0% { transform:translateY(0); } 100% { transform:translateY(-5px); } }
 .banner-content { display:flex; height:220px; }
 .banner-left { flex:5; position:relative; background:#f1f3f5; }
+/* === Video Banner === */
+.banner-left--video {
+  position:relative;
+  background:#000;
+  overflow:hidden;
+}
+
+.banner-left--video .banner-video {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  background:#000;
+  pointer-events:none;
+  z-index:0;
+}
+
+.banner-left--video .banner-video-fallback {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+  z-index:0;
+}
+
+.banner-left--video .banner-video-fallback img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 .banner-left img { width:100%; height:100%; object-fit:cover; }
 .banner-right {
   flex:6;
@@ -578,16 +613,4 @@ input[type=tel]:focus {
     padding: 10px 18px;
     margin-top: 28px;
   }
-}
-
-.banner-left--video { position:relative; background:#000; overflow:hidden; }
-.banner-left--video img { display:none; } /* kalau masih ada img lama */
-.banner-video {
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:0;
-  pointer-events:none;
 }
