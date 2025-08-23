@@ -322,3 +322,56 @@ document.addEventListener('mousemove', e => {
     root.style.setProperty('--marquee-speed','40s');
   }
 })();
+
+/* === VIDEO FALLBACK HANDLER === */
+(function initHeroVideoFallback(){
+  const video = document.querySelector('.banner-video');
+  const fallback = document.querySelector('.banner-video-fallback');
+  if (!video) return;
+
+  function showFallback() {
+    if (!fallback) return;
+    if (!fallback.hidden) return;
+    fallback.hidden = false;
+    // Hapus video supaya tidak tetap memegang resource
+    try { video.pause(); } catch(e){}
+    video.remove();
+  }
+
+  // 1. Browser tidak punya dukungan video element (sangat jarang modern)
+  if (!('HTMLVideoElement' in window)) {
+    showFallback();
+    return;
+  }
+
+  // 2. Prefers-reduced-motion → langsung fallback (opsional)
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    showFallback();
+    return;
+  }
+
+  // 3. Error decoding / load
+  video.addEventListener('error', showFallback);
+
+  // 4. Autoplay test
+  // (Kalau gagal, kita fallback – atau bisa pilih: tampilkan kontrol)
+  try {
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.catch(() => {
+        // Autoplay gagal (biasanya video tidak muted; tapi kita sudah muted)
+        showFallback();
+      });
+    }
+  } catch(e) {
+    showFallback();
+  }
+
+  // 5. Timeout safeguard: kalau 3 detik belum dapat frame
+  let gotFrame = false;
+  const canPlayHandler = () => { gotFrame = true; };
+  video.addEventListener('loadeddata', canPlayHandler, { once:true });
+  setTimeout(() => {
+    if (!gotFrame) showFallback();
+  }, 3000);
+})();
