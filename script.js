@@ -113,8 +113,7 @@ if (phoneInput) {
   });
 }
 
-/* ========== FORM SUBMISSION (SIMULATED) ========== */
-const existingPhones = new Set(['11987654321','21123456789','85999887766']);
+/* ========== FORM SUBMISSION ========== */
 const form = document.getElementById('registrationForm');
 const submitBtn = document.getElementById('submitBtn');
 const submitText = document.getElementById('submitText');
@@ -128,37 +127,42 @@ if (form) {
     submitError.textContent = '';
     submitSuccess.textContent = '';
 
-    const raw = phoneInput.value.replace(/\D/g,'');
+    // Validasi nomor WA
+    const raw = phoneInput.value.replace(/\D/g, '');
     if (raw.length !== 11) {
       whatsappError.textContent = 'Número deve ter 11 dígitos (DDD + número).';
       return;
     }
-    if (existingPhones.has(raw)) {
-      submitError.textContent = 'Este número já está cadastrado em nosso sistema!';
-      return;
-    }
+    whatsappError.textContent = '';
 
+    // Loading UI
     submitBtn.disabled = true;
     submitText.hidden = true;
     submitLoading.hidden = false;
 
-    const payload = {
-      whatsapp: phoneInput.value.trim(),
-      timestamp: new Date().toISOString(),
-      ip: await getUserIP()
-    };
-
+    // Kirim ke backend Render
     try {
-      await new Promise(r => setTimeout(r, 1200));
-      console.log('Registration data:', payload);
-      submitSuccess.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
-      setTimeout(() => {
-        closeModal();
-        form.reset();
-        submitSuccess.textContent = '';
-      }, 2200);
+      const payload = {
+        numero_wa: '+55' + raw,
+        referrer: window.location.href
+      };
+      const res = await fetch('https://poplive-backend.onrender.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.ok) {
+        submitSuccess.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+        setTimeout(() => {
+          closeModal();
+          form.reset();
+          submitSuccess.textContent = '';
+        }, 2200);
+      } else {
+        submitError.textContent = data.message || 'Erro ao enviar cadastro. Tente novamente.';
+      }
     } catch (err) {
-      console.error(err);
       submitError.textContent = 'Erro ao enviar cadastro. Tente novamente.';
     } finally {
       submitBtn.disabled = false;
@@ -166,16 +170,6 @@ if (form) {
       submitLoading.hidden = true;
     }
   });
-}
-
-async function getUserIP() {
-  try {
-    const res = await fetch('https://api.ipify.org?format=json');
-    const data = await res.json();
-    return data.ip;
-  } catch {
-    return 'Unknown';
-  }
 }
 
 /* ========== STAGGER ENTRANCE FOR PLATFORM LINKS ========== */
@@ -243,65 +237,3 @@ document.addEventListener('mousemove', e => {
     root.style.setProperty('--marquee-speed','40s');
   }
 })();
-
-// ... kode lain tetap
-
-const form = document.getElementById('registrationForm');
-const phoneInput = document.getElementById('whatsapp');
-const submitBtn = document.getElementById('submitBtn');
-const submitText = document.getElementById('submitText');
-const submitLoading = document.getElementById('submitLoading');
-const submitError = document.getElementById('submitError');
-const submitSuccess = document.getElementById('submitSuccess');
-const whatsappError = document.getElementById('whatsappError');
-
-if (form) {
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    submitError.textContent = '';
-    submitSuccess.textContent = '';
-
-    // Validasi nomor WA
-    const raw = phoneInput.value.replace(/\D/g, '');
-    if (raw.length !== 11) {
-      whatsappError.textContent = 'Número deve ter 11 dígitos (DDD + número).';
-      return;
-    }
-    whatsappError.textContent = '';
-
-    // Loading UI
-    submitBtn.disabled = true;
-    submitText.hidden = true;
-    submitLoading.hidden = false;
-
-    // Kirim ke backend
-    try {
-      const payload = {
-        numero_wa: '+55' + raw,
-        referrer: window.location.href
-      };
-      const res = await fetch('https://liveform-backend.onrender.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (data.ok) {
-        submitSuccess.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
-        setTimeout(() => {
-          closeModal();
-          form.reset();
-          submitSuccess.textContent = '';
-        }, 2200);
-      } else {
-        submitError.textContent = data.message || 'Erro ao enviar cadastro. Tente novamente.';
-      }
-    } catch (err) {
-      submitError.textContent = 'Erro ao enviar cadastro. Tente novamente.';
-    } finally {
-      submitBtn.disabled = false;
-      submitText.hidden = false;
-      submitLoading.hidden = true;
-    }
-  });
-}
