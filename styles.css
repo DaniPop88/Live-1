@@ -579,3 +579,15 @@ input[type=tel]:focus {
     margin-top: 28px;
   }
 }
+
+.banner-left--video { position:relative; background:#000; overflow:hidden; }
+.banner-left--video img { display:none; } /* kalau masih ada img lama */
+.banner-video {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  pointer-events:none;
+}
