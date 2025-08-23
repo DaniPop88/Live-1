@@ -94,22 +94,22 @@ if (slider) {
   startAuto();
 }
 
-/* ========== PHONE INPUT FORMAT & VALIDATION (UPDATED 10/11 dígitos) ========== */ // CHANGED
+/* ========== PHONE INPUT FORMAT & VALIDATION (ACCEPT 9–11 DIGITS) ========== */
 const phoneInput = document.getElementById('whatsapp');
 const whatsappError = document.getElementById('whatsappError');
 
-// (Opcional) Lista de DDD válidos – use se quiser validar DDD no submit
+// (Opsional) DDD válidos – remova se não quiser validar
 const DDD_VALIDOS = new Set([
- '11','12','13','14','15','16','17','18','19',
- '21','22','24','27','28',
- '31','32','33','34','35','37','38',
- '41','42','43','44','45','46',
- '47','48','49',
- '51','53','54','55',
- '61','62','63','64','65','66','67','68','69',
- '71','73','74','75','77','79',
- '81','82','83','84','85','86','87','88','89',
- '91','92','93','94','95','96','97','98','99'
+  '11','12','13','14','15','16','17','18','19',
+  '21','22','24','27','28',
+  '31','32','33','34','35','37','38',
+  '41','42','43','44','45','46',
+  '47','48','49',
+  '51','53','54','55',
+  '61','62','63','64','65','66','67','68','69',
+  '71','73','74','75','77','79',
+  '81','82','83','84','85','86','87','88','89',
+  '91','92','93','94','95','96','97','98','99'
 ]);
 
 if (phoneInput) {
@@ -120,9 +120,7 @@ if (phoneInput) {
       whatsappError.textContent = '';
       return;
     }
-
     if (digits.length <= 2) {
-      // Só DDD parcialmente
       e.target.value = '(' + digits;
       whatsappError.textContent = '';
       return;
@@ -130,20 +128,16 @@ if (phoneInput) {
 
     const ddd = digits.slice(0,2);
     const rest = digits.slice(2);
-
-    // Decide se é caminho celular (rest[0] === '9') ou fixo
-    const isCelular = rest[0] === '9';
+    const isCelularStyle = rest[0] === '9';
 
     let formatted;
-    if (isCelular) {
-      // Celular: (DD) 9XXXX-XXXX (5+4) total 11 dígitos
+    if (isCelularStyle) {
       if (rest.length <= 5) {
-        formatted = `(${ddd}) ${rest}`; // ainda sem traço
+        formatted = `(${ddd}) ${rest}`;
       } else {
         formatted = `(${ddd}) ${rest.slice(0,5)}-${rest.slice(5,9)}`;
       }
     } else {
-      // Fixo: (DD) XXXX-XXXX (4+4) total 10 dígitos
       if (rest.length <= 4) {
         formatted = `(${ddd}) ${rest}`;
       } else {
@@ -153,10 +147,20 @@ if (phoneInput) {
 
     e.target.value = formatted;
     whatsappError.textContent = '';
+    phoneInput.removeAttribute('aria-invalid');
+  });
+
+  // Optional: handle paste to sanitize quickly
+  phoneInput.addEventListener('paste', e => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text');
+    const digits = text.replace(/\D/g,'').slice(0,11);
+    phoneInput.value = digits;
+    phoneInput.dispatchEvent(new Event('input'));
   });
 }
 
-/* ========== FORM SUBMISSION (REAL TO BACKEND) ========== */
+/* ========== FORM SUBMISSION (ACCEPT 9–11 DIGITS) ========== */
 const form = document.getElementById('registrationForm');
 const submitBtn = document.getElementById('submitBtn');
 const submitText = document.getElementById('submitText');
@@ -169,20 +173,53 @@ if (form) {
     e.preventDefault();
     submitError.textContent = '';
     submitSuccess.textContent = '';
+    whatsappError.textContent = '';
+    phoneInput?.removeAttribute('aria-invalid');
 
     const raw = phoneInput.value.replace(/\D/g,'');
-    if (raw.length !== 11) {
-      whatsappError.textContent = 'Número deve ter 11 dígitos (DDD + número).';
+    const len = raw.length;
+
+    if (len < 9 || len > 11) {
+      whatsappError.textContent = 'Digite entre 9 e 11 dígitos (DDD + número).';
+      phoneInput?.setAttribute('aria-invalid','true');
       return;
     }
+
+    if (len >= 3) {
+      const ddd = raw.slice(0,2);
+      if (!DDD_VALIDOS.has(ddd)) {
+        whatsappError.textContent = 'DDD inválido.';
+        phoneInput?.setAttribute('aria-invalid','true');
+        return;
+      }
+    }
+
+    if (len === 11 && raw[2] !== '9') {
+      whatsappError.textContent = 'Para 11 dígitos, deve haver 9 após o DDD.';
+      phoneInput?.setAttribute('aria-invalid','true');
+      return;
+    }
+
+    if (len === 10 && raw[2] === '9') {
+      // Se quiser permitir mesmo assim, comente as 2 linhas abaixo.
+      whatsappError.textContent = 'Parece celular incompleto (faltando 1 dígito).';
+      phoneInput?.setAttribute('aria-invalid','true');
+      return;
+    }
+
+    let tipo;
+    if (len === 11) tipo = 'celular';
+    else if (len === 10) tipo = 'fixo';
+    else tipo = 'parcial';
 
     submitBtn.disabled = true;
     submitText.hidden = true;
     submitLoading.hidden = false;
 
-    // Prepare payload sesuai backend
     const payload = {
-      numero_wa: phoneInput.value.trim(),
+      numero_wa: '+55' + raw,
+      tipo,
+      length: len,
       referrer: window.location.href
     };
 
@@ -194,18 +231,18 @@ if (form) {
       });
       const result = await res.json();
       if (res.ok && result.ok) {
-        submitSuccess.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+        submitSuccess.textContent = 'Cadastro enviado!';
         setTimeout(() => {
           closeModal();
           form.reset();
           submitSuccess.textContent = '';
-        }, 2200);
+        }, 1800);
       } else {
-        submitError.textContent = result.message || 'Erro ao enviar cadastro.';
+        submitError.textContent = result.message || 'Erro ao enviar.';
       }
     } catch (err) {
       console.error(err);
-      submitError.textContent = 'Erro ao enviar cadastro. Tente novamente.';
+      submitError.textContent = 'Falha de conexão. Tente novamente.';
     } finally {
       submitBtn.disabled = false;
       submitText.hidden = false;
