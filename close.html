@@ -26,16 +26,39 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="promo-banner">
         <div class="banner-content">
-          <div class="banner-left">
-            <video class="hero-video" autoplay playsinline muted loop poster="https://i.ibb.co/1fyLbMBH/Fone.png" aria-label="POP PRÊMIO – apresentação">
-              <source src="media/hero.mp4" type="video/mp4">
-              <img src="https://i.ibb.co/1fyLbMBH/Fone.png" alt="POP PREMIO">
+          <div class="banner-left banner-left--video">
+            <video
+              class="banner-video"
+              src="hero.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              poster="https://i.ibb.co/1fyLbMBH/Fone.png"
+            >
+              <!-- Source utama -->
+              <source src="hero.mp4" type="video/mp4">
+              <!-- (Opsional) tambah format lain
+              <source src="hero.webm" type="video/webm">
+              -->
+              <!-- Fallback text (jika browser sangat lama) -->
+              Seu navegador não suporta vídeo HTML5.
             </video>
+          
+            <!-- Fallback image (default hidden) -->
+            <div class="banner-video-fallback" hidden>
+              <img
+                src="https://i.ibb.co/gb3RFg6w/reres.gif"
+                alt="Promo POP"
+                decoding="async"
+                loading="lazy"
+              >
+            </div>
           </div>
           <div class="banner-right">
             <div class="promo-text">
-              <p>ASSISTA ÀS LIVES E PARTICIPE DO SORTEIO DE PRÊMIOS TODOS OS DIAS!<br><br>TOTAL 50 GANHADORES POR DIA!</p>
-            </div>
+              <p><br>ASSISTA ÀS LIVES E PARTICIPE DO SORTEIO DE PRÊMIOS TODOS OS DIAS!<br>TOTAL 50 GANHADORES POR DIA!</p>
           </div>
         </div>
       </div>
